@@ -1,0 +1,16 @@
+body {
+    background-image: url("../images/backgroundblack.jpg");
+}
+
+.navbar-custom {
+    background-color: #0a0a0a;
+}
+
+.content-menu {
+    background: #0a0a0a;
+}
+
+#loginButton{
+    background-color: #e60012;
+    border-color: #e60012;
+}

@@ -1,0 +1,367 @@
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;   
+}
+
+#nintendoLogo {
+    width: auto;
+    height: 60px;
+}
+
+#contenedorFixture{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-top: 10px;
+    float:left;
+}
+
+
+#tablaPosicion{
+    font-family:  Roboto;
+    padding-top: 50px;
+    margin: 0 auto;
+    display: flex;
+}
+
+
+#tablaPosicion li{
+    list-style: none;
+    text-align: center;
+    padding: 20px;
+    color: red;
+    display: inline-block;
+}
+
+#tablaPosicion li h4{
+    font-weight: bold;
+    text-align: center;
+    transform: translateY(4px);
+    position:relative;
+    
+}
+
+#tablaGeneral {
+    width: 50%;
+    height: 100px;
+  
+    
+}
+
+#headerTabla{
+    width: 220px;
+    height: auto;
+    text-align: center;
+}
+
+#rankTable{
+    width: 400px;
+    height: 100px;
+}
+
+#tablasPosiciones {
+    float:left;
+    width: 500px;
+}
+
+
+#mapaSiguiente {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    left: 700px;
+    top: 700px;
+}
+
+
+
+body {
+      /* Background image is centered vertically and horizontally at all times */
+    background-position: center center;
+    
+    /* Background image doesn't tile */
+    background-repeat: no-repeat;
+    
+    /* Background image is fixed in the viewport so that it doesn't move when 
+       the content's height is greater than the image's height */
+    background-attachment: fixed;
+    
+    /* This is what makes the background image rescale based
+       on the container's size */
+    background-size: cover;
+    
+    /* Set a background color that will be displayed
+       while the background image is loading */
+    
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 80px;
+ 
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+    text-indent: 0;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    color:black;
+    background-color: #e60012;
+    opacity: 50%;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);    
+}
+
+.carousel-indicators .active {
+    width: 16x;
+    height: 16px;
+    margin: 10px;
+    background-color: black;
+    color: #e60012;
+}
+
+
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 40px;
+    height: 50px;
+    padding-top: 0;
+}
+
+
+
+.navbar-custom {
+    background-color: #e60012;
+  
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgb(255, 255, 255);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgb(0, 0, 0);
+    text-indent: 20px;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+
+
+
+strong {
+    font-weight: bold; 
+}
+
+em {
+    font-style: italic; 
+}
+
+table {
+    background: #f5f5f5;
+    border-collapse: separate;
+    box-shadow: inset 0 1px 0 #fff;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 30px auto;
+    text-align: left;
+    width: 800px;
+}   
+
+th {
+    background: url(https://www.walldevil.com/wallpapers/a77/background-black-noise-colorful-wallpaper-wallpapers.jpg), linear-gradient(#777, #444);
+    border-left: 1px solid #555;
+    border-right: 1px solid #777;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #333;
+    box-shadow: inset 0 1px 0 #999;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 15px;
+    position: relative;
+    text-shadow: 0 1px 0 #000;  
+}
+
+th:after {
+    background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+    content: '';
+    display: block;
+    height: 25%;
+    left: 0;
+    margin: 1px 0 0 0;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+}
+
+th:first-child {
+    border-left: 1px solid #777;    
+    box-shadow: inset 1px 1px 0 #999;
+}
+
+th:last-child {
+    box-shadow: inset -1px 1px 0 #999;
+}
+
+td {
+    border-right: 1px solid #fff;
+    border-left: 1px solid #e8e8e8;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 10px 15px;
+    position: relative;
+    transition: all 300ms;
+    color: white;
+    font-weight: bold;
+}
+
+td:first-child {
+    box-shadow: inset 1px 0 0 #fff;
+}   
+
+td:last-child {
+    border-right: 1px solid #e8e8e8;
+    box-shadow: inset -1px 0 0 #fff;
+}   
+
+tr {
+    background: url(http://www.ruralroot.org/wp/wp-content/uploads/2017/06/gray-noise-background.jpg); 
+}
+
+
+
+tr:last-of-type td {
+    box-shadow: inset 0 -1px 0 #fff; 
+}
+
+tr:last-of-type td:first-child {
+    box-shadow: inset 1px -1px 0 #fff;
+}   
+
+tr:last-of-type td:last-child {
+    box-shadow: inset -1px -1px 0 #fff;
+}   
+
+tbody:hover td {
+    color: transparent;
+    text-shadow: 0 0 3px #aaa;
+}
+
+tbody:hover tr:hover td {
+    color: #444;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+
+
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ------------------- Carousel Styling ------------------- */
+
+
+.carousel-caption {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0 0 10px 25px;
+  color: #fff;
+  text-align: left;
+}
+
+.card-body{
+    border-top: 5px solid rgb(0, 0, 0);
+    border-radius: 0;
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+
+#descripcionEquipo {
+    height: 700px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    float: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-image: url(../img/back.jpg);
+  
+}
+
+.jugador-name {
+    font-size: 60px;
+    font-family: 'Poppins', sans-serif;
+ 
+}
+
+.texto-jugador {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    float:center;
+   
+}
+
+.gridV{
+    display: inline-block;
+}
+
+
+

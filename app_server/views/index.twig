@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block estilos %}
+     <!-- Estilos propios -->
+    <link id="Estilos propios" href="stylesheets/styles.css" rel="stylesheet">
+    <link href="stylesheets/content-menu-style.css" rel="stylesheet">
+    <link id="estilo" href="stylesheets/redstyle.css" rel="stylesheet">
+    <link id="toggleBotonStyle" href="stylesheets/toggleButton.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'content-menu.twig' %} 
+{% include 'carousel.twig' %} 
+{% include 'fixture.twig' %} 
+{% include 'equipos.twig' %} 
+{% include 'posiciones.twig' %} 
+{% endblock %}
+
+{% block scripts %}
+    <script src="javascripts/posiciones.js"></script>
+    <script src="javascripts/fixture.js"></script>
+    <script src="javascripts/scroll.js"></script>
+    <script src="javascripts/cargacomponentes.js"></script>
+    <script src="javascripts/listarEquipos.js"></script>
+    <script src="javascripts/storage.js"></script>
+    <script src="javascripts/cambioTema.js"></script>
+{% endblock %}

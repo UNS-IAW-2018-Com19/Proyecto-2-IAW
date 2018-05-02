@@ -1,0 +1,33 @@
+.content-menu{
+    background: #e60012;
+    display:table;
+    margin: 0 ;
+}
+
+.content-menu li{
+    list-style: none;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    transition: all 300ms;
+    display: inline-block;
+   /* background: #e60012;*/
+}
+
+.content-menu li:hover{
+    transform: translateY(10px);
+    background: rgba(172, 8, 8, 0.288);
+}
+
+.content-menu li span{
+    font-size: 20px;   
+}
+
+.content-menu li h4{
+    font-weight: 100;
+    text-align: center;
+    transform: translateY(4px);
+    position:relative;
+   
+}
