@@ -37,4 +37,4 @@ process.on('SIGTERM', () => {
   });
 });
 
-require('./equipos');
+require('./modelos');
