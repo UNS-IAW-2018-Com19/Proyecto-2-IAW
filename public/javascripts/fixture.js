@@ -1,11 +1,10 @@
 
 $(function(){
-    $.getJSON('json/fixture.json', function(fixture){
-        $.getJSON('json/equipos.json',function(equipos){
+    $.get("./api/carreras", function(fixture){
+        $.get("./api/equipos", function(equipos){
             armarFixture(fixture);
         });
     });
- 
 });
 
 
@@ -33,7 +32,7 @@ function makeFixtureCards(container, fixture){
 
     var img, bodyCart, h5, vueltas, src,card;
 
-    $.each(fixture.fixture,function(key,carrera){
+    $.each(fixture,function(key,carrera){
         //Armo la imagen del mapa
         card = $("<div></div>").addClass("card bg-light col-sm-3");
         card.css("width","400px");
@@ -82,14 +81,14 @@ $("body").on("click","#resultados",function() {
 
     var container = $("#contenedorTablas").append($("<div></div>").addClass('col-sm-10'));
 
-    makeTablaaPosiciones(fecha,fixture,container);
+  //  makeTablaaPosiciones(fecha,fixture,container);
    
     $("#contenedorTablas").show();
     $('html, body').animate({
         scrollTop: $("#contenedorTablas").offset().top
         }, 500);
 });
-
+/*
 function makeTablaaPosiciones(fecha, fixture, contenedor){
     $.getJSON('json/equipos.json',function(equipos){
         $.getJSON('json/jugadores.json',function(jugadores){
@@ -155,3 +154,4 @@ function makeRankTablee(container, data) {
     return container.append(table);
 }
 
+*/

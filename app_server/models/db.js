@@ -37,4 +37,6 @@ process.on('SIGTERM', () => {
   });
 });
 
-require('./modelos');
+require('./carreras');
+require('./equipos');
+require('./jugadores');

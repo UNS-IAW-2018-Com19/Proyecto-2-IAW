@@ -15,10 +15,15 @@ $(function(){
             $("body").append($("<div/>").addClass("jumbotron jumbotron-fluid container-full").attr("id","descripcionEquipo"));
             $("#descripcionEquipo").hide();
    
-            $.getJSON('json/equipos.json', function(equipos){
+            $.get("./api/equipos", function(equipos){
                 hacerTabla(contenedor,equipos);
             });
 
+            /*
+            $.getJSON('json/equipos.json', function(equipos){
+                hacerTabla(contenedor,equipos);
+            });
+            */
             scrollabajo(contenedor);
         }
         else{
@@ -28,11 +33,12 @@ $(function(){
 
     });    
 });
+
 $(function(){ 
     $("body").on("click",".participante",function(e) {
         var selectedLiText = $(this).text();
         selectedLiText=selectedLiText.substring(11);
-        $.getJSON('json/jugadores.json', function(jugadores){
+        $.get("./api/jugadores", function(jugadores){
             var pantallaJ= getPantallaJugador(selectedLiText,jugadores);
             $("#tablaEquipos").remove();
             $("#descripcionEquipo").show();
@@ -49,8 +55,8 @@ function hacerTabla(container,dataEquipos){
     var row= $("<tr/>");
     var row2= $("<tr/>");
 
-    $.getJSON('json/jugadores.json', function(jugadores){
-
+    $.get("./api/jugadores", function(jugadores){
+         
     $.each(dataEquipos.equipos,function(key,equipo){
         
         //Creamos lista donde agregaremos caracteristicas de equipo

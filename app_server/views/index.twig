@@ -9,12 +9,11 @@
 {% endblock %}
 
 {% block body %}
-{% include 'content-menu.twig' %} 
+{% include "shared/content-menu.twig" %}
 {% include 'carousel.twig' %} 
-{% include 'fixture.twig' %} 
-{% include 'equipos.twig' %} 
-{% include 'posiciones.twig' %} 
+
 {% endblock %}
+
 
 {% block scripts %}
     <script src="javascripts/posiciones.js"></script>

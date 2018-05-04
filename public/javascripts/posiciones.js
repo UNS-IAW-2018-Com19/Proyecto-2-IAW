@@ -1,13 +1,13 @@
+/* jshint esversion: 6 */
 $(function(){
     $("#tablaPosicion").hide();
 });
 
 $(function(){
-    $.getJSON('json/fixture.json', function(fixture){
-        $.getJSON('json/equipos.json',function(equipos){
-            $.getJSON('json/jugadores.json',function(jugadores){
-                    armarTablaPosicionesGenerales(fixture, equipos,jugadores);
-            
+     $.get("./api/carreras", function(fixture){
+        $.get("./api/equipos", function(equipos){
+            $.get("./api/jugadores", function(jugadores){
+                armarTablaPosicionesGenerales(fixture, equipos,jugadores);         
             });
         });
  
@@ -17,6 +17,11 @@ $(function(){
 
 function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores){
     $("#posiciones").click(function(){
+
+        const subtitleTemplate = Twig.twig({
+            href: "posiciones.twig", async:false
+        });
+
         var $this = $(this); //cache the reference
         var contenedor = $("#tablaPosicion");
         var grid = $("#gridTabla");
@@ -30,8 +35,8 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
             var index=0;
             var cantPosiciones = 12;
     /* Este es el código menos reusable que hice en mi vida :) */
-            $.each(dataCarreras.fixture,function(key,carrera){
-                $.each(dataEquipos.equipos,function(key,equipo){
+            $.each(dataCarreras,function(key,carrera){
+                $.each(dataEquipos,function(key,equipo){
                     for(var i = 0; i < cantPosiciones;i++){
                         if(equipo.id_jugadorUno == carrera.posiciones[i][0].jugador || equipo.id_jugadorDos == carrera.posiciones[i][0].jugador){
                             puntos[index][0] = equipo.nombre;
@@ -72,8 +77,8 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
 */
 
 function makeTablaPosiciones(fecha, fixture){
-    $.getJSON('json/equipos.json',function(equipos){
-        $.getJSON('json/jugadores.json',function(jugadores){
+    $.get("./api/equipos", function(equipos){
+        $.get("./api/jugadores", function(jugadores){
             armarTablaPosiciones(fecha,fixture,equipos,jugadores);
         });
     });
@@ -87,15 +92,15 @@ function armarTablaPosiciones(fecha, dataCarreras, dataEquipos, dataJugadores, c
             var maxFechas = 4;
             var i;
 
-            $.each(dataCarreras.fixture,function(key,carrera){
+            $.each(dataCarreras,function(key,carrera){
                 if(carrera.fecha == maxFechas){
-                    $.each(dataEquipos.equipos,function(key,equipo){   
+                    $.each(dataEquipos,function(key,equipo){   
                         if(fecha == carrera.fecha){
                             for(i = 0; i < cantPosiciones;i++){
                                 if(equipo.id_jugadorUno == carrera.posiciones[i][0].jugador || equipo.id_jugadorDos == carrera.posiciones[i][0].jugador){
                                         dataPosiciones[i][2] = equipo.nombre;
-                                        dataPosiciones[i][3] = "+"+carrera.posiciones[i][0].puntaje;       
-                                        $.each(dataJugadores.jugadores,function(key,player){  
+                                        dataPosiciones[i][3] = "+"+carrera.posiciones[i][0].puntaje;   
+                                        $.each(dataJugadores, function(key,player){  
                                                 if(carrera.posiciones[i][0].jugador == player.id_jugador)
                                                     dataPosiciones[i][1] = player.userName;
                                         });
