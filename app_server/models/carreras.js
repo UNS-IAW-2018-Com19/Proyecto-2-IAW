@@ -24,8 +24,12 @@ const carreraSchema = new mongoose.Schema({
       type: Number,
       required: true
     },
+    descripcion: {
+      type: String,
+      required: true
+    },
     completada: {
-      type: Boolean,
+      type: String,
       required: true
     },
     posiciones: [{ jugador: {

@@ -18,6 +18,12 @@ const getCarreras = function (req, res) {
 		});
 };
 
+const armarTabla = function (req, res) {
+	console.log("hola entre");
+	res.render('posiciones');
+};
+
 module.exports = {
-	getCarreras
+	getCarreras,
+	armarTabla
 };

@@ -18,6 +18,8 @@ const getEquipos = function (req, res) {
 		});
 };
 
+
+
 module.exports = {
-	getEquipos
+	getEquipos,
 };

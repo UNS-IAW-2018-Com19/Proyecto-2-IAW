@@ -14,7 +14,6 @@ $(function(){
     });
 });
 
-
 function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores){
     $("#posiciones").click(function(){
         var $this = $(this); //cache the reference
@@ -27,11 +26,31 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
             contenedor = $("#tablaPosicion");
             var puntos = new Array(6,3);
             puntos = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
+
+            dataPosiciones = [[1,0,0,0],[2,0,0,0],[3,0,0,0],[4,0,0,0],[5,0,0,0],[6,0,0,0],[7,0,0,0],[8,0,0,0],[9,0,0,0],[10,0,0,0],[11,0,0,0],[12,0,0,0]];
+           
             var index=0;
             var cantPosiciones = 12;
-    /* Este es el código menos reusable que hice en mi vida :) */
+            var ultimaCarrera;
+
+            $.each(dataCarreras,function(key,carrera){
+                    ultimaCarrera = carrera.fecha;
+            });
+
             $.each(dataCarreras,function(key,carrera){
                 $.each(dataEquipos,function(key,equipo){
+                    if(ultimaCarrera == carrera.fecha){
+                        for(var j = 0; j < cantPosiciones;j++){
+                            if(equipo.id_jugadorUno == carrera.posiciones[j][0].jugador || equipo.id_jugadorDos == carrera.posiciones[j][0].jugador){
+                                dataPosiciones[j][2] = equipo.nombre;
+                                dataPosiciones[j][3] = "+"+carrera.posiciones[j][0].puntaje;   
+                                $.each(dataJugadores, function(key,player){  
+                                    if(carrera.posiciones[j][0].jugador == player.id_jugador)
+                                        dataPosiciones[j][1] = player.userName;
+                                });
+                            }
+                        }
+                    }
                     for(var i = 0; i < cantPosiciones;i++){
                         if(equipo.id_jugadorUno == carrera.posiciones[i][0].jugador || equipo.id_jugadorDos == carrera.posiciones[i][0].jugador){
                             puntos[index][0] = equipo.nombre;
@@ -42,7 +61,7 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
                     }
                 index++;   
                 });
-            index=0;
+                index=0;
             });
             
             puntos.sort(function(a, b){
@@ -53,12 +72,18 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
                     return (a[1] < b[1]) ? 1 : -1;
                 }
             });
-            
-          
             var arr = [["Equipo", "Puntos", "Wins"]];
             arr = arr.concat(puntos);
-            armarTablaPosiciones(4,dataCarreras, dataEquipos, dataJugadores, contenedor);
+
+            console.log(dataPosiciones);
+            var posiciones = [["Posición", "Jugador", "Equipo", "Puntaje"]];
+            posiciones = posiciones.concat(dataPosiciones);
+
+            var subtitulo = "ULTIMA CARRERA";
+            makeRankTable(contenedor,posiciones, subtitulo);
+           
             makeTable(contenedor,arr);
+           
             scrollabajo(contenedor);
         } 
         else{
@@ -67,60 +92,14 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
     });
 }
 
-/*
-    Dada una fecha de una carrera jugada, devuelve la tabla de posiciones de la misma.
-*/
-
-function makeTablaPosiciones(fecha, fixture){
-    $.get("./api/equipos", function(equipos){
-        $.get("./api/jugadores", function(jugadores){
-            armarTablaPosiciones(fecha,fixture,equipos,jugadores);
-        });
-    });
-}
-
-function armarTablaPosiciones(fecha, dataCarreras, dataEquipos, dataJugadores, contenedor){
-            var puntos = new Array(6,4);
-            dataPosiciones = [[1,0,0,0],[2,0,0,0],[3,0,0,0],[4,0,0,0],[5,0,0,0],[6,0,0,0],[7,0,0,0],[8,0,0,0],[9,0,0,0],[10,0,0,0],[11,0,0,0],[12,0,0,0]];
-            var index=0;
-            var cantPosiciones = 12;
-            var maxFechas = 4;
-            var i;
-
-            $.each(dataCarreras,function(key,carrera){
-                if(carrera.fecha == maxFechas){
-                    $.each(dataEquipos,function(key,equipo){   
-                        if(fecha == carrera.fecha){
-                            for(i = 0; i < cantPosiciones;i++){
-                                if(equipo.id_jugadorUno == carrera.posiciones[i][0].jugador || equipo.id_jugadorDos == carrera.posiciones[i][0].jugador){
-                                        dataPosiciones[i][2] = equipo.nombre;
-                                        dataPosiciones[i][3] = "+"+carrera.posiciones[i][0].puntaje;   
-                                        $.each(dataJugadores, function(key,player){  
-                                                if(carrera.posiciones[i][0].jugador == player.id_jugador)
-                                                    dataPosiciones[i][1] = player.userName;
-                                        });
-                                }
-                            }
-                        }
-                    });
-                }
-            });
-            var arr = [["Posición", "Jugador", "Equipo", "Puntaje"]];
-            arr = arr.concat(dataPosiciones);
-            makeRankTable(contenedor,arr);
-          
-}
-
-
-function makeRankTable(container, data) {
-
-    container = container.append($("<div></div>").addClass('col-sm-9'));
+function makeRankTable(containerPrinc, data, textSub) {
+    container = $("<div></div>").addClass('col-sm-3');
     var table = $("<table/>").addClass('table table-dark');
     table.addClass('table table-dark');
     table.addClass('table table-bordered');
     table.addClass('table table-md');
     table.attr("id","rankTable")
-    var subtitulo = $("<th></th>").attr("colspan", "4").text("TABLA DE POSICIONES ULTIMA CARRERA");
+    var subtitulo = $("<th></th>").attr("colspan", "4").text("TABLA DE POSICIONES "+textSub);
     subtitulo.attr("id","headerTabla");
     table.append($("<tr></tr>").append(subtitulo));    
     $.each(data, function(rowIndex, r) {
@@ -130,14 +109,17 @@ function makeRankTable(container, data) {
         });
         table.append(row);
     });
-    return container.append(table);
+
+    container.append(table);
+ 
+    return  containerPrinc.append(container);
 }
 
 
-function makeTable(container, data) {
+function makeTable(containerPrinc, data) {
 
-        container = container.append($("<div></div>").addClass('col-sm-1'));
-
+        container = $("<div></div>").addClass('col-sm-9');
+   
         var table = $("<table/>").addClass('table table table-dark table-striped table-bordered table-md ');
         table.attr("id","tablaGeneral");
         var subtitulo = $("<th></th>").attr("colspan", "3").text("TABLA DE POSICIONES GENERALES");
@@ -153,7 +135,8 @@ function makeTable(container, data) {
             });
             table.append(row);
         });
-        return container.append(table);
+        container.append(table);
+        return  containerPrinc.append(container);
 }
 
 

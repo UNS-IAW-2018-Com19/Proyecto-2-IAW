@@ -361,7 +361,31 @@ tbody:hover tr:hover td {
 
 .gridV{
     display: inline-block;
+    
 }
 
+.modal-body {
+  overflow-x: auto;
+  font-family: 'Prompt', sans-serif;
+  font-weight: bold;
+}
 
+.modal-title{
+    font-weight: bold;
+}
+
+body.modal-open #wrap{
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+}
+  
+.modal-backdrop {background: #f7f7f7;}
+
+.close {
+    font-size: 50px;
+    display:block;
+}
 
