@@ -6,7 +6,6 @@ $(function(){
         var grid = $("#gridEquipos");
         var id = "contenedorEquipos";
 
-
         if (!$this.hasClass('disabled')) {
             cargarVista(grid, id, "equipos");
             contenedor=$("#contenedorEquipos");
@@ -18,12 +17,6 @@ $(function(){
             $.get("./api/equipos", function(equipos){
                 hacerTabla(contenedor,equipos);
             });
-
-            /*
-            $.getJSON('json/equipos.json', function(equipos){
-                hacerTabla(contenedor,equipos);
-            });
-            */
             scrollabajo(contenedor);
         }
         else{
@@ -57,35 +50,35 @@ function hacerTabla(container,dataEquipos){
 
     $.get("./api/jugadores", function(jugadores){
          
-    $.each(dataEquipos.equipos,function(key,equipo){
-        
-        //Creamos lista donde agregaremos caracteristicas de equipo
-        var lista=$("<ul/>").addClass('list-group');
+        $.each(dataEquipos,function(key,equipo){
+            
+            //Creamos lista donde agregaremos caracteristicas de equipo
+            var lista=$("<ul/>").addClass('list-group');
 
-        //Obtenemos caracteristicas
-        var srcImagen="img/logos/"+equipo.logo;
-        var imagen=$("<img/>").attr({src:srcImagen,width:"80px",height:"80px",align:"left"});
-        imagen.addClass("rounded");
-        var jugadorUno=(obtenerJugador(jugadores,equipo.id_jugadorUno));
-        var jugadorDos=(obtenerJugador(jugadores,equipo.id_jugadorDos));
-        
-                
-        lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light").text(equipo.nombre));
-        lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 1: "+jugadorUno));
-        lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 2: "+jugadorDos));
-        
-    if(i<3){    
-        row.append($("<td/>").append(imagen).append(lista));
-        table.append(row);
+            //Obtenemos caracteristicas
+            var srcImagen="images/logos/"+equipo.logo;
+            var imagen=$("<img/>").attr({src:srcImagen,width:"80px",height:"80px",align:"left"});
+            imagen.addClass("rounded");
+            var jugadorUno=(obtenerJugador(jugadores,equipo.id_jugadorUno));
+            var jugadorDos=(obtenerJugador(jugadores,equipo.id_jugadorDos));
+            
+                    
+            lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light").text(equipo.nombre));
+            lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 1: "+jugadorUno));
+            lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 2: "+jugadorDos));
+            
+        if(i<3){    
+            row.append($("<td/>").append(imagen).append(lista));
+            table.append(row);
+            i++;
+            }
+        else{
+        row2.append($("<td/>").append(imagen).append(lista));
+        table.append(row2);
         i++;
-        }
-    else{
-       row2.append($("<td/>").append(imagen).append(lista));
-       table.append(row2);
-       i++;
-        }
-                
-    });
+            }
+                    
+        });
 
    });
     table.attr({height:"500px",cellspacing:"0",cellpadding:"0"});
@@ -98,7 +91,7 @@ function hacerTabla(container,dataEquipos){
 
 function obtenerJugador(data,idjugador){
     var devolver; 
-    $.each(data.jugadores,function(key,jugador){ 
+    $.each(data,function(key,jugador){ 
         if(jugador.id_jugador==idjugador){
             devolver=jugador.userName;
         }
@@ -108,7 +101,7 @@ function obtenerJugador(data,idjugador){
 
 function getPantallaJugador(nombrejugador,jugadores){
     var player; 
-     $.each(jugadores.jugadores,function(key,jugador){
+     $.each(jugadores,function(key,jugador){
          if(jugador.userName==nombrejugador){
              player=jugador;
          }
@@ -119,10 +112,10 @@ function getPantallaJugador(nombrejugador,jugadores){
      gridPersonaje.css("float","left");
      var user=$("<p/>").addClass("jugador-name").text(nombrejugador).append($("<br/>"));
      var pj = $("<p/>").addClass("texto-jugador").text("Personaje Favorito: ").append($("<br/>"));;
-     var playerPicture = $("<img/>").attr({src:"img/personajes/"+player.fotopersonaje,width:"auto",height:"150px"});
+     var playerPicture = $("<img/>").attr({src:"images/personajes/"+player.fotopersonaje,width:"auto",height:"150px"});
      var textoPlayer = $("<p/>").addClass("texto-jugador").text(player.personaje);
 
-     var source="img/avatar/"+player.avatar;
+     var source="images/avatar/"+player.avatar;
      var avatar=$("<img/>").attr({src:source,width:"150px",height:"150px"});
     
      gridUser.append(avatar);

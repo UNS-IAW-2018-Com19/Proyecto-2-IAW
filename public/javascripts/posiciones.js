@@ -17,11 +17,6 @@ $(function(){
 
 function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores){
     $("#posiciones").click(function(){
-
-        const subtitleTemplate = Twig.twig({
-            href: "posiciones.twig", async:false
-        });
-
         var $this = $(this); //cache the reference
         var contenedor = $("#tablaPosicion");
         var grid = $("#gridTabla");

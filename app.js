@@ -4,7 +4,9 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 var logger = require('morgan');
+const passport = require('passport');
 require('./app_server/models/db');
 
 
@@ -22,8 +24,21 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
+app.use(require('express-session')({
+  secret: 'nodejs-twig-secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/twig.min.js'));
+app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

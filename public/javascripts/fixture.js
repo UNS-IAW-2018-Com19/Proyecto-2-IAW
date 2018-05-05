@@ -1,12 +1,9 @@
 
 $(function(){
     $.get("./api/carreras", function(fixture){
-        $.get("./api/equipos", function(equipos){
             armarFixture(fixture);
         });
     });
-});
-
 
 function armarFixture(fixture){
     $("#fixture").click(function(){
@@ -39,7 +36,7 @@ function makeFixtureCards(container, fixture){
        
         img = $("<img/>").addClass("card-img-top");
         img.attr('alt', 'Card image cap');
-        src = ("img/mapas/").concat(carrera.fotoMapa);  
+        src = ("images/mapas/").concat(carrera.fotoMapa);  
         img.attr("src",src);
 
         //Armo el cart body
