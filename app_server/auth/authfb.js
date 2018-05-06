@@ -31,8 +31,10 @@ passport.use(new Strategy({
                 if (err) console.log(err);
             });
         } 
-        console.log("HOLA ENTRE SOY UN CONSOLE LOG");
-            //found user. Return
+        console.log("USUARIO");
+        console.log(user);
+        
+        //found user. Return
         return done(err, user);
         
     });
