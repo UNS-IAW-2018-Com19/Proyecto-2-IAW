@@ -39,13 +39,10 @@ app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/t
 app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
 
-
-
-
 passport.use(new FacebookStrategy({
   clientID: '179829129338029',
   clientSecret: '05e2f6ba0b420e05c57b42614bf42858',
-  callbackURL: "/auth/facebook/callback"
+  callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
   console.log(profile);
