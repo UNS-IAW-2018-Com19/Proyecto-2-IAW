@@ -13,19 +13,15 @@ const userSchema = new mongoose.Schema({
     },
     email:{ 
         type: String,
-        required: true
     },
     estilo:{ 
         type: String,
-        required: true
     },
     equiposFavoritos:{ 
         type: [String],
-        required: true
     },
     jugadoresFavoritos:{ 
-        type: [String],
-        required: true
+        type: [String],    
     }
 });
 
