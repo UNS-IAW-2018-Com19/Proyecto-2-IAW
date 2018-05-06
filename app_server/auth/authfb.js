@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 var Strategy = require('passport-facebook').Strategy;
 var User = require('../models/users');
 
-
 passport.use(new Strategy({
     clientID: '179829129338029',
     clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
