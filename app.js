@@ -7,13 +7,29 @@ var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 var logger = require('morgan');
 const passport = require('passport');
-const FacebookStrategy = require('passport-facebook');
+var Strategy = require('passport-facebook').Strategy;
 require('./app_server/models/db');
 
 
 const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
 const apiRouter = require('./app_server/routes/api');
+
+//passport setup
+
+passport.use(new Strategy({
+  clientID: '179829129338029',
+  clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
+  callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+
 
 var app = express();
 
@@ -38,24 +54,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/twig.min.js'));
 app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
+//routes
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
-passport.use(new FacebookStrategy({
-  clientID: '179829129338029',
-  clientSecret: '05e2f6ba0b420e05c57b42614bf42858',
-  callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
-},
-function(accessToken, refreshToken, profile, cb) {
-  console.log(profile);
-  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
-}
-));
 
+//passport routes
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/flogin',
+app.get('/login/facebook',
   passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
@@ -65,10 +74,10 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   });
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api', apiRouter);
-
+app.get('/profile',
+function(req, res){
+  res.render('profile', { user: req.user });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
