@@ -389,3 +389,7 @@ body.modal-open #wrap{
     display:block;
 }
 
+.btn-fb{
+    background-color:#3b5998;
+    color: black;
+}

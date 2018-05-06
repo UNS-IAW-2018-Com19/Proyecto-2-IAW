@@ -7,7 +7,8 @@ var User = require('../models/users');
 passport.use(new Strategy({
     clientID: '179829129338029',
     clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
-    callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
+    callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback",
+    profileFields: ['id', 'emails', 'name'] 
   },
   function(accessToken, refreshToken, profile, done) {
     //check user table for anyone with a facebook ID of profile.id
@@ -21,19 +22,19 @@ passport.use(new Strategy({
         if (!user) {
             user = new User({
                 username: profile.displayName,
-             //   email: profile.emails[0].value,
                 facebookid: profile.id,
+                email: profile.emails[0].value,
                 //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
                 facebook: profile._json
             });
             user.save(function(err) {
                 if (err) console.log(err);
-                return done(err, user);
             });
-        } else {
+        } 
+        console.log(user.email);
             //found user. Return
-            return done(err, user);
-        }
+        return done(err, user);
+        
     });
   }));
 
