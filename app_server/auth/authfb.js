@@ -2,7 +2,7 @@
 const passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var User = require('../models/users');
-
+var findOrCreate = require('mongoose-findorcreate');
 //passport setup
 
 passport.use(new Strategy({
