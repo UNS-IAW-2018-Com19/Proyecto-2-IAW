@@ -87,7 +87,7 @@ app.get('/auth/facebook/callback',
   app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn,
   function(req, res){
-    res.render('profile', { user: req.user });
+    console.log(req.user);
   });
 
 // catch 404 and forward to error handler
