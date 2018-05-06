@@ -23,9 +23,12 @@ passport.use(new Strategy({
   callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
+ // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    console.log(profile);
+    console.log(accessToken);
+    console.log(refreshToken);
+    return cb(null, profile);
+  //});
 }
 ));
 
