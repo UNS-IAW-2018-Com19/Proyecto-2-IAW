@@ -44,3 +44,4 @@ process.on('SIGTERM', () => {
 require('./carreras');
 require('./equipos');
 require('./jugadores');
+require('./users');

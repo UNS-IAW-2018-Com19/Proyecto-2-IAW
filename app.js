@@ -7,39 +7,14 @@ var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 var logger = require('morgan');
 const passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+
 require('./app_server/models/db');
 
 
 const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
 const apiRouter = require('./app_server/routes/api');
-
-//passport setup
-
-passport.use(new Strategy({
-  clientID: '179829129338029',
-  clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
-  callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback"
-},
-function(accessToken, refreshToken, profile, cb) {
- // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    console.log(profile);
-    console.log(accessToken);
-    console.log(refreshToken);
-    return cb(null, profile);
-  //});
-}
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
+const authRouter = require('./app_server/routes/auth');
 
 var app = express();
 
@@ -66,29 +41,15 @@ app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
 //routes
 app.use('/', indexRouter);
+app.use('/', authRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
 
-//passport routes
+
+//passport setup
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get('/login/facebook',
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
-  app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn,
-  function(req, res){
-    console.log(req.user);
-  });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
