@@ -21,7 +21,7 @@ passport.use(new Strategy({
         if (!user) {
             user = new User({
                 username: profile.displayName,
-                email: profile.emails[0].value,
+             //   email: profile.emails[0].value,
                 facebookid: profile.id,
                 //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
                 facebook: profile._json
