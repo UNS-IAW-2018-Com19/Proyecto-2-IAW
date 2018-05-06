@@ -41,7 +41,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 
-
 var app = express();
 
 // view engine setup
@@ -84,12 +83,13 @@ app.get('/auth/facebook/callback',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
-/*
-app.get('/profile',
-function(req, res){
-  res.render('profile', { user: req.user });
-});
-*/
+
+  app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn,
+  function(req, res){
+    res.render('profile', { user: req.user });
+  });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
