@@ -1,7 +1,8 @@
 /* jshint esversion: 6 */
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb://localhost/tournament';
+//const dbURI = 'mongodb://localhost/tournament';
+const dbURI = process.env.MLAB_URI;
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', () => {

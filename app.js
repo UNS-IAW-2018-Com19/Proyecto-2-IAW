@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 var logger = require('morgan');
 const passport = require('passport');
+const FacebookStrategy = require('passport-facebook');
 require('./app_server/models/db');
 
 
@@ -32,17 +33,45 @@ app.use(require('express-session')({
   saveUninitialized: true
 }));
 
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/twigjs/twig.min.js',  express.static(__dirname + '/node_modules/twig/twig.min.js'));
 app.use('/shared',  express.static(__dirname + '/app_server/views/shared'));
 
 
+
+
+
+passport.use(new FacebookStrategy({
+  clientID: '179829129338029',
+  clientSecret: '05e2f6ba0b420e05c57b42614bf42858',
+  callbackURL: "/auth/facebook/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  console.log(profile);
+  User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/flogin',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
