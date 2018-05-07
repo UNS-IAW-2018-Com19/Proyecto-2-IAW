@@ -9,7 +9,6 @@ passport.use(new Strategy({
     clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
     callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback",
   //  callbackURL: "https://57a5134b.ngrok.io/auth/facebook/callback",
-    profileFields: ['id', 'emails', 'name'] 
   },
   function(accessToken, refreshToken, profile, done) {
     //check user table for anyone with a facebook ID of profile.id
@@ -24,7 +23,7 @@ passport.use(new Strategy({
             user = new User({
                 username: profile.displayName,
                 facebookid: profile.id,
-                email: profile.emails[0].value,
+         //       email: profile.emails[0].value,
                 //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
                 facebook: profile._json
             });
