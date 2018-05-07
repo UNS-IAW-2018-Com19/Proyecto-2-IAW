@@ -7,7 +7,8 @@ var User = require('../models/users');
 passport.use(new Strategy({
     clientID: '179829129338029',
     clientSecret: '05e2f6ba0b420e05c57b42614bf42858', 
-    callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback",
+  //  callbackURL: "https://e-sportstournament.herokuapp.com/auth/facebook/callback",
+    callbackURL: "https://57a5134b.ngrok.io/auth/facebook/callback",
     profileFields: ['id', 'emails', 'name'] 
   },
   function(accessToken, refreshToken, profile, done) {
@@ -30,10 +31,7 @@ passport.use(new Strategy({
             user.save(function(err) {
                 if (err) console.log(err);
             });
-        } 
-        console.log("USUARIO");
-        console.log(user);
-        
+        }         
         //found user. Return
         return done(err, user);
         

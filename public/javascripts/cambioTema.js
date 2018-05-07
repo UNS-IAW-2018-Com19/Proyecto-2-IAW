@@ -1,17 +1,24 @@
 var estilo;
 
 $(function(){
-    if (recuperarEstilo() != undefined)
-        estilo = setEstilo(recuperarEstilo());
+    
+    var recuperarEstilo = recuperarEstiloBD(function(estiloRecuperado){
+        setEstilo(estiloRecuperado);
+    });
+    
+    if(recuperarEstilo == undefined)
+        estilo = setEstilo(1);
     else 
-        estilo = setEstilo(1);  
+        estilo = recuperarEstilo;
 
     $("#toggleB").click(function() {
-       guardarEstilo(estilo);
+       guardarEstiloBD(estilo);
        estilo = setEstilo(estilo);
     });
 
 });
+
+
 
 function setEstilo(estilo){
     if(estilo==0){    //estilo dark
