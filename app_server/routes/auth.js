@@ -5,7 +5,12 @@ var router = express.Router();
 const passportFacebook = require('../auth/authfb');
 
 
-router.get('/login/facebook', passportFacebook.authenticate('facebook', { scope: ['email']}));
+router.get('/logout/facebook', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/login/facebook', passportFacebook.authenticate('facebook'));
 router.get('/auth/facebook/callback',
 passportFacebook.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {

@@ -6,8 +6,8 @@ const isAuthenticated = function(req, res, next) {
 		return next();
 
 	res
-		.status(401)
-		.json({'error': 'not autorized'});
+		.status(304)
+		.json({'warning': 'not modified'});
 }
 
 module.exports = isAuthenticated;
