@@ -12,8 +12,8 @@ $(function(){
         estilo = recuperarEstilo;
 
     $("#toggleB").click(function() {
-       guardarEstiloBD(estilo);
-       estilo = setEstilo(estilo);
+          guardarEstiloBD(estilo);
+          estilo = setEstilo(estilo);
     });
 
 });

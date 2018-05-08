@@ -1,5 +1,4 @@
 /* jshint esversion: 6*/
-
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
@@ -23,9 +22,7 @@ const getEstilo = function (req, res) {
 
 
 const saveEstilo = function (req, res) {
-    console.log("req: "+req.user.facebookid);
-    console.log("req body: "+req.body.estilo);
-    User
+     User
 		.update({facebookid: req.user.facebookid}, {username: req.user.username, estilo: req.body.estilo}, 
 			{upsert: true, setDefaultsOnInsert: true}, (err, estilo) => {
 				if (err) { 

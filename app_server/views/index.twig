@@ -4,22 +4,46 @@
      <!-- Estilos propios -->
     <link id="Estilos propios" href="stylesheets/styles.css" rel="stylesheet">
     <link href="stylesheets/content-menu-style.css" rel="stylesheet">
-    <link id="estilo" href="stylesheets/redstyle.css" rel="stylesheet">
-    <link id="toggleBotonStyle" href="stylesheets/toggleButton.css" rel="stylesheet">
-    
-{% endblock %}
-
-{% block body %}
-{% include "shared/content-menu.twig" %}
-{% include 'carousel.twig' %}  
-{% include 'equipos.twig' %} 
-{% include 'fixture.twig' %} 
-{% include 'posiciones.twig' %}
+    <link id="estilo" href="stylesheets/redstyle.css" rel="stylesheet">    
 {% endblock %}
 
 
+{% block equipos %}
+    <div id="gridEquipos" class = "container-full">
+            <div class="row" id="contenedorEquipos"></div>
+    </div>
+{% endblock %}
+
+{% block fixture %}
+    <div id="gridFixture" class"container-full">
+         <div class="row" id="contenedorFixture"></div>   
+    </div>  
+     <!-- Modal -->  
+     <div class="modal fade" id="classModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id = "principalModal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="classModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalTable">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+    </div>  
+{% endblock %}
 
 
+{% block posiciones %}
+    <div id="gridTabla" class = "container-full">
+        <div class="row" id="tablaPosicion"></div>
+    </div>
+{% endblock %}
 
 {% block scripts %}
     <script src="javascripts/posiciones.js"></script>

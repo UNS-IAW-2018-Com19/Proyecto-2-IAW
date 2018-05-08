@@ -10,7 +10,6 @@ body {
     background: #e60012;
 }
 
-#loginButton{
-    background-color: '';
-    border-color: '';
+#toggleB{
+    background-color: #3b5998;
 }

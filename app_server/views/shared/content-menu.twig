@@ -1,50 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-custom fixed-top navbar-dark">
-    <div class="navbar-header">
-        <a class="header-brand" href="#"><img id="nintendoLogo" src="images/logos/nintendo.png"  alt="Nintendo Logo"></a>
-    </div>
-
-    <div class="navbar-header">
-        <a class="header-brand" href="#"><img id="nintendoswitch" src="images/logos/nintendoswitch.png" width="60px" alt="Nintendo Switch"></a>
-    </div>
-    
-    <button class="navbar-toggler btn-dark" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-    </button>   
-
-    <div class="collapse navbar-collapse" id="navbarToggler">
-        <div class="content-menu">
-            <li id="equipos"><span><img width="30px" src="images/logos/super-mario.svg"></img></span><h5>Equipos</h5></li>
-            <li id="posiciones"><span><img width="30px" src="images/logos/trophy.svg"></span><h5>Posiciones</h5></li>
-            <li id="fixture"><span><img width="30px" src="images/logos/racing.svg"></span><h5>Fixture</h5></li>
-            
+        <div class="navbar-header">
+            <a class="header-brand" href="#"><img id="nintendoLogo" src="images/logos/nintendo.png"  alt="Nintendo Logo"></a>
         </div>
-    
-        <ul class="nav nav-pills ml-auto">      
-            <li class="nav-item">
-                <button id="toggleB" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                            Estilo
-                </button>
-            </li>
-            {% if user %}
 
-            <li class="nav-item">
-                <div class="chip chip-md">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="Contact Person"> Duende Carlos
-                </div>
-            </li>
-                    
-          
-            <li class="nav-item" id="logout">
-                    <a href="/logout/facebook"><button type="button" class="btn btn-lg btn-fb"><i class="fa fa-facebook pr-1"></i>Log out</button></a>
-            </li>
+        <div class="navbar-header">
+            <a class="header-brand" href="#"><img id="nintendoswitch" src="images/logos/nintendoswitch.png" width="60px" alt="Nintendo Switch"></a>
+        </div>
+        
+        <button class="navbar-toggler btn-dark" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>   
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <div class="content-menu">
+                <a><li id="equipos"><span><img width="30px" src="images/logos/super-mario.svg"></img></span><h5>Equipos</h5></li></a>
+                <li id="posiciones"><span><img width="30px" src="images/logos/trophy.svg"></span><h5>Posiciones</h5></li>
+                <li id="fixture"><span><img width="30px" src="images/logos/racing.svg"></span><h5>Fixture</h5></li>
+                
+            </div>
+        
+            <ul class="nav nav-pills ml-auto">     
+                <a id="toggleB" class="btn"><i class="fa fa-paint-brush mr-1" aria-hidden="true"></i>Estilo</a> 
+                </li>
+            {% if user %}
+                <li class="nav-item">
+                    <div class="chip chip-md">
+                    <img src="images/logos/avatar.svg" alt="Contact Person"> {{user.username}}
+                    </div>
+                </li>
+                <li class="nav-item" id="logout">
+                        <a href="/logout/facebook"><button type="button" class="btn btn-lg btn-fb"><i class="fa fa-facebook pr-1"></i>Log out</button></a>
+                </li>
             {% else %}
-            <li class="nav-item" id="login">
-                <a href="/login/facebook"><button type="button" class="btn btn-lg btn-fb"><i class="fa fa-facebook pr-1"></i>Log in with Facebook</button></a>
-            </li>
-            
-                  
-           {% endif %}
-        </ul>
-    </div>            
-</nav>
+                <li class="nav-item" id="login">
+                    <div class="text-center">
+                        <a class="btn fb-color btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Login</a>
+                    </div>
+                </li>
+            {% endif %}
+            </ul>
+        </div>            
+    </nav>
 

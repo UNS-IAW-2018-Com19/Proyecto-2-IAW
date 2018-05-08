@@ -20,6 +20,7 @@ function armarFixture(fixture){
             contenedor = $("#contenedorFixture");
 
             makeFixtureCards(contenedor, fixture);
+            $("#guardarEquiposFavs").remove();
             scrollabajo(contenedor);
         }
         else{

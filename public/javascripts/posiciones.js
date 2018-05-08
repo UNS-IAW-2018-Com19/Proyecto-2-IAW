@@ -75,7 +75,6 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
             var arr = [["Equipo", "Puntos", "Wins"]];
             arr = arr.concat(puntos);
 
-            console.log(dataPosiciones);
             var posiciones = [["Posición", "Jugador", "Equipo", "Puntaje"]];
             posiciones = posiciones.concat(dataPosiciones);
 
@@ -83,7 +82,7 @@ function armarTablaPosicionesGenerales(dataCarreras, dataEquipos, dataJugadores)
             makeRankTable(contenedor,posiciones, subtitulo);
            
             makeTable(contenedor,arr);
-           
+            $("#guardarEquiposFavs").remove();
             scrollabajo(contenedor);
         } 
         else{

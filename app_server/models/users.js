@@ -22,6 +22,9 @@ const userSchema = new mongoose.Schema({
     },
     jugadoresFavoritos:{ 
         type: [String],    
+    },
+    photo:{ 
+        type: String    
     }
 });
 
