@@ -121,6 +121,15 @@ function removerJugadorFavoritoBD(favorito){
     guardarJugadoresFavoritosBD(localStorageFavoritos);
 }
 
+function removerEquipoFavoritoBD(favorito){
+    localStorageFavoritos = recuperarEquiposFavoritos();
+    for(var i = 0; i < localStorageFavoritos.length;i++){
+        if(localStorageFavoritos[i] == favorito)
+           localStorageFavoritos.splice(i,i);
+    }
+    guardarEquiposFavoritosBD(localStorageFavoritos);
+}
+
 function recuperarEstiloBD(callback) {
 	$.ajax({
 	    url: './api/estilo',

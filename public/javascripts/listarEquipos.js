@@ -243,7 +243,7 @@ $(function(){
             $(target).removeClass("btn-success");
             $(target).addClass("btn-primary");
             $(target).append(estrellavacia);
-           //  removerEquipoFavoritoBD(favorito[0].id);
+            removerEquipoFavoritoBD(favorito[0].id);
          }
     }); 
 });
