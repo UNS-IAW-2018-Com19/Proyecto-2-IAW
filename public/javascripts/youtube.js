@@ -41,7 +41,7 @@ function getVids(pid){
                 $.each(data.items, function(i, item){
                     videTitle = item.snippet.title;
                     videoId= item.snippet.resourceId.videoId;
-                    output = '<li><iframe width="1240" height="600" src="http://www.youtube.com/embed/'+videoId+'"></iframe></li>'; 
+                    output = '<li><iframe width="1240" height="600" src="https://www.youtube.com/embed/'+videoId+'"></iframe></li>'; 
                      //Append to results listStyleType
                     $('#results').append(output);
                 });
