@@ -71,32 +71,37 @@ function hacerTabla(container,dataEquipos){
             label.append(checkBox);
             formCheck.append(label);
 
-            var buttonEquiposFavoritos = $("<button/>").addClass("btn btn-primary").attr("id","guardarEquiposFavs").text("Marcar como favorito");
-            var link = $("<i/>").addClass("fa fa-star-o").attr("aria-hidden","true");
-            buttonEquiposFavoritos.append(link);
+            var buttonEquiposFavoritos = $("<button/>").addClass("btn btn-primary botonEquipoFavorito").text("Marcar como favorito");
+            buttonEquiposFavoritos.attr("id",equipo.nombre);
+            var estrellavacia = $("<i/>").addClass("fa fa-star-o").attr("aria-hidden","true");
+            var estrella= $("<i/>").addClass("fa fa-star").attr("aria-hidden","true");
+            buttonEquiposFavoritos.append(estrellavacia);
 
             recuperarEquiposFavoritosBD(function(equiposRecuperados){
                 if(equiposRecuperados == undefined)
                     equiposRecuperados = recuperarEquiposFavoritos();
-                
-                for(var index = 0; index < equiposRecuperados.length; index++){
-                if(equiposRecuperados[index] == checkBox.attr("id")){
-                        checkBox.attr("checked","checked"); 
-                    }
-                }  
-                
-            });
+                for(var i = 0; i < equiposRecuperados.length; i++){
+                     if (equiposRecuperados[i] == equipo.nombre){   
+                        buttonEquiposFavoritos.removeClass("btn-primary");
+                        buttonEquiposFavoritos.addClass("btn-success").text("Marcado favorito");
+                        buttonEquiposFavoritos.append(estrella);
+                     }
+                }
+        });
+
+
                     
             lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light").text(equipo.nombre));
             lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 1: "+jugadorUno));
             lista.append($("<li/>").addClass("list-group-item list-group-item-action list-group-item-light participante").text("Jugador 2: "+jugadorDos));
+            lista.append(buttonEquiposFavoritos);
             if(i<3){    
-            row.append($("<td/>").append(imagen).append(lista).append(buttonEquiposFavoritos));
+            row.append($("<td/>").append(imagen).append(lista));
             table.append(row);
             i++;
         }
         else{
-            row2.append($("<td/>").append(imagen).append(lista).append(buttonEquiposFavoritos));
+            row2.append($("<td/>").append(imagen).append(lista));
             table.append(row2);
             i++;
         }
@@ -202,66 +207,44 @@ $(function(){
         $("#tablaEquipos").show();
     });
 });
-/*
-$(function(){ 
-    $("body").on("click","#guardarEquiposFavs",function(e) {
-        var checksbox = document.getElementsByClassName("favchecked");
-        localStorage.clear();
-        seleccionados = [];
-    
-        for(var i = 0; i < checksbox.length; i++){
-            if(checksbox[i].checked){
-                seleccionados.push(checksbox[i].id);            
-            }
-        }
-        guardarEquiposFavoritos(seleccionados);
-        guardarEquiposFavoritosBD(seleccionados);
-
-        var div = $("<div/>").addClass("alert alert-success").attr("role","alert").text("Los equipos favoritos fueron guardados exitosamente!");
-        $("#gridEquipos").append(div);
-        $('.alert').show();
-        $('.alert').fadeTo(2000, 2000).slideUp(2000, function(){
-            $("#success-alert").slideUp(2000);});
-    }); 
-});*/
 
 $(function(){ 
     $("body").on("click",".botonEquipoFavorito",function(e) {
-        var favorito = document.getElementsById("botonEquipoFavorito");
+        var target = e.target;
+        var favorito = e.target.id;
         var noagregar=false;
 
-        if($(favorito).hasClass("btn-primary")){
-            var jugadoresFavoritos = recuperarJugadoresFavoritos();
-            for(var i =0; i < jugadoresFavoritos.length; i++){
-                if(jugadoresFavoritos[i] == favorito[0].id){
+        if($(target).hasClass("btn-primary")){
+            var equiposFavoritos = recuperarEquiposFavoritos();
+            for(var i =0; i < equiposFavoritos.length; i++){
+                if(equiposFavoritos[i] == favorito){
                      noagregar = true;
                 }
             }
             if(!noagregar){
-                     jugadoresFavoritos.push(favorito[0].id);
+                equiposFavoritos.push(favorito);
              }
              else{
-                 if (jugadoresFavoritos.length == 0){
-                     jugadoresFavoritos.push(favorito[0].id);
+                 if (equiposFavoritos.length == 0){
+                    equiposFavoritos.push(favorito);
                  }
              }
              var estrella = $("<i/>").addClass("fa fa-star").attr("aria-hidden","true");
-             $(".botonPersonajeFavorito").text("Marcado Favorito");
-             $(".botonPersonajeFavorito").removeClass("btn-primary");
-             $(".botonPersonajeFavorito").append(estrella);
-             $(".botonPersonajeFavorito").addClass("btn-success");
-             guardarJugadoresFavoritos(jugadoresFavoritos);
-             guardarJugadoresFavoritosBD(jugadoresFavoritos);
+             $(target).text("Marcado Favorito");
+             $(target).removeClass("btn-primary");
+             $(target).append(estrella);
+             $(target).addClass("btn-success");
+             guardarEquiposFavoritos(equiposFavoritos);
+             guardarEquiposFavoritosBD(equiposFavoritos);
          }
          else{
-             $(".botonPersonajeFavorito").text("Guardar como favorito");
-             $(".botonPersonajeFavorito").removeClass("btn-success");
-             $(".botonPersonajeFavorito").addClass("btn-primary");
-             removerJugadorFavoritoBD(favorito[0].id);
+            var estrellavacia = $("<i/>").addClass("fa fa-star-o").attr("aria-hidden","true");
+            $(target).text("Guardar como favorito");
+            $(target).removeClass("btn-success");
+            $(target).addClass("btn-primary");
+            $(target).append(estrellavacia);
+           //  removerEquipoFavoritoBD(favorito[0].id);
          }
-
-        guardarEquiposFavoritos(seleccionados);
-        guardarEquiposFavoritosBD(seleccionados);
     }); 
 });
 
@@ -285,19 +268,21 @@ $(function(){
                     jugadoresFavoritos.push(favorito[0].id);
                 }
             }
+            var estrella = $("<i/>").addClass("fa fa-star").attr("aria-hidden","true");
             $(".botonPersonajeFavorito").text("Marcado Favorito");
             $(".botonPersonajeFavorito").removeClass("btn-primary");
             $(".botonPersonajeFavorito").addClass("btn-success");
-            console.log("DESPUES "+jugadoresFavoritos);
+            $(".botonPersonajeFavorito").append(estrella);
             guardarJugadoresFavoritos(jugadoresFavoritos);
             guardarJugadoresFavoritosBD(jugadoresFavoritos);
         }
         else{
+            var estrellavacia = $("<i/>").addClass("fa fa-star-o").attr("aria-hidden","true");
             $(".botonPersonajeFavorito").text("Guardar como favorito");
             $(".botonPersonajeFavorito").removeClass("btn-success");
             $(".botonPersonajeFavorito").addClass("btn-primary");
+            $(".botonPersonajeFavorito").append(estrellavacia);
             removerJugadorFavoritoBD(favorito[0].id);
         }
     }); 
 });
-

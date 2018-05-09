@@ -30,8 +30,7 @@ const getEquiposFavoritos = function (req, res) {
         	} else {
 				res
 					.status(200)
-					.json(user.equiposFavoritos);
-					
+					.json(user.equiposFavoritos);		
 			}
 		});
 };

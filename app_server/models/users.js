@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
     },
     photo:{ 
         type: String    
+    },
+    editor:{
+        type: Boolean
     }
 });
 

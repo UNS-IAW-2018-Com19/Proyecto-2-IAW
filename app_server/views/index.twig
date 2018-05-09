@@ -4,7 +4,8 @@
      <!-- Estilos propios -->
     <link id="Estilos propios" href="stylesheets/styles.css" rel="stylesheet">
     <link href="stylesheets/content-menu-style.css" rel="stylesheet">
-    <link id="estilo" href="stylesheets/redstyle.css" rel="stylesheet">    
+    <link id="estilo" href="stylesheets/redstyle.css" rel="stylesheet"> 
+    <link href="stylesheets/commentbox.css" rel="stylesheet">   
 {% endblock %}
 
 
@@ -30,6 +31,39 @@
                     </div>
                     <div class="modal-body" id="modalTable">
                     </div>
+                    {# Comment box #}
+
+        <div id="commentbox" class="detailBox">
+            <div class="titleBox">
+              <label><h1>Comentarios de la carrera</h1></label>
+            </div>
+              <div class="actionBox">
+                <ul id="commentList" class="commentList">
+                  <li>
+                {% if user.editor %}
+                    <div class="commenterImage">
+                        <img src={{user.photo}} />
+                    </div>
+              
+                {% else %}
+                    <div class="commenterImage">
+                        <img src="images/logos/avatar.svg" />
+                    </div>
+                {% endif %}
+                    <div class="commentText" id="comentario">
+                    </div>
+                  </li>
+                </ul>
+                {% if user.editor %}
+                <form  class="form-inline" role="form">
+                  <div class="form-group">
+                    <input id="inputComment_id" class="form-control" type="text" placeholder="Añade un comentario..." />
+                  </div>
+                    <button type="submit" class="btn btn-primary" id="agregarComentario">Agregar</button>
+                </form>
+                {% endif %}
+              </div>
+            </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
@@ -45,6 +79,11 @@
     </div>
 {% endblock %}
 
+{% block youtube %}
+<div id="youtubeContainer">
+</div>
+{% endblock %}
+
 {% block scripts %}
     <script src="javascripts/posiciones.js"></script>
     <script src="javascripts/fixture.js"></script>
@@ -53,4 +92,5 @@
     <script src="javascripts/listarEquipos.js"></script>
     <script src="javascripts/storage.js"></script>
     <script src="javascripts/cambioTema.js"></script>
+    <script src="javascripts/youtube.js"></script>
 {% endblock %}

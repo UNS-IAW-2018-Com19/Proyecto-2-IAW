@@ -118,7 +118,6 @@ function removerJugadorFavoritoBD(favorito){
         if(localStorageFavoritos[i] == favorito)
            localStorageFavoritos.splice(i,i);
     }
-    guardarJugadoresFavoritos(localStorageFavoritos);
     guardarJugadoresFavoritosBD(localStorageFavoritos);
 }
 

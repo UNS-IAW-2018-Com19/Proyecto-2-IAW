@@ -7,10 +7,11 @@ const carrerasApi = require('../controllers/carrerasApi');
 const jugadoresApi = require('../controllers/jugadoresApi');
 const ctrlEstilo = require('../controllers/estiloController');
 
-
 /* GET home page. */
 
 router.get('/carreras', carrerasApi.getCarreras);
+router.post('/comentario', middleware, carrerasApi.saveComments);
+router.post('/recupComentario', middleware, carrerasApi.getComments);
 router.get('/equipos', equiposApi.getEquipos);
 router.get('/jugadores', jugadoresApi.getJugadores);
 router.post('/estilo', middleware, ctrlEstilo.saveEstilo);
@@ -19,6 +20,8 @@ router.post('/equiposFav', middleware, equiposApi.saveEquiposFavoritos);
 router.get('/equiposFav', middleware, equiposApi.getEquiposFavoritos);
 router.post('/jugadoresFav', middleware, jugadoresApi.saveJugadoresFavoritos);
 router.get('/jugadoresFav', middleware, jugadoresApi.getJugadoresFavoritos);
+
+
 
 
 module.exports = router;

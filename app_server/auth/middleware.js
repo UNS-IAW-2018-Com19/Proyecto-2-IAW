@@ -8,6 +8,6 @@ const isAuthenticated = function(req, res, next) {
 	res
 		.status(304)
 		.json({'warning': 'not modified'});
-}
+};
 
 module.exports = isAuthenticated;

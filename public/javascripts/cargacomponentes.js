@@ -2,9 +2,9 @@
 A partir de un componente, carga la vista correspondiente
 */
 
-var comp = ["posiciones","fixture","equipos"];
+var comp = ["posiciones","fixture","equipos","youtube"];
 
-var contenedores = ["#tablaPosicion","#contenedorFixture","#contenedorEquipos"];
+var contenedores = ["#tablaPosicion","#contenedorFixture","#contenedorEquipos", "#results"];
 
 function cargarVista(grid, id, component){
     for (var i = 0; i < comp.length; i++){

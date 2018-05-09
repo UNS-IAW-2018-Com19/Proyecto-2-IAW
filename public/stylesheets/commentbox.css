@@ -1,0 +1,66 @@
+#commentbox .detailBox {
+    width:320px;
+    border:1px solid #bbb;
+    margin:50px;
+}
+#commentbox .titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+#commentbox .titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+#commentbox .commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+#commentbox .commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+#commentbox .commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+#commentbox .actionBox .form-group * {
+    width:100%;
+}
+#commentbox .taskDescription {
+    margin-top:10px 0;
+}
+#commentbox .commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+#commentbox .commentList li {
+    margin:0;
+    margin-top:10px;
+}
+#commentbox .commentList li > div {
+    display:table-cell;
+}
+#commentbox .commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+#commentbox .commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+#commentbox .commentText p {
+    margin:0;
+}
+#commentbox .sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+#commentbox .actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+}

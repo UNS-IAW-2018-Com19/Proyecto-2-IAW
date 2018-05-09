@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var dbURI = process.env.MLAB_URI;
 
 if(dbURI === undefined){
-  dbURI = 'mongodb://localhost/tournament';
+ var dbURI = 'mongodb://localhost/tournament';
 }
 
 mongoose.connect(dbURI);

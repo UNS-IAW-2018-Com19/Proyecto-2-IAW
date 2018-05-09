@@ -10,12 +10,13 @@ router.get('/logout/facebook', function(req, res) {
   res.redirect('/');
 });
 
-router.get('/login/facebook', passportFacebook.authenticate('facebook', { scope: ['email']}));
+router.get('/login/facebook', passportFacebook.authenticate('facebook', { scope: ['public_profile']}));
 router.get('/auth/facebook/callback',
 passportFacebook.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
+
   });
 
 

@@ -1,3 +1,4 @@
+/* jshint esversion: 6*/
 
 $(function(){
     $.get("./api/carreras", function(fixture){
@@ -13,8 +14,6 @@ function armarFixture(fixture){
         var id = "contenedorFixture";
 
         $(".resultados").removeClass('disabled');
-
-
         if (!$this.hasClass('disabled')) {
             cargarVista(grid, id, "fixture");
             contenedor = $("#contenedorFixture");
@@ -77,7 +76,8 @@ $(function(){
         var idFecha = $(this).attr('id');
         var posiciones;
         var $this = $(this); 
-       
+        var contenedorComentario = $("#comentario");
+        contenedorComentario.empty();
         if (!$this.hasClass('disabled')) {
             $.get("./api/jugadores", function(jugadores){
                 $.get("./api/carreras", function(carreras){
@@ -86,7 +86,29 @@ $(function(){
                         dataPosiciones = armarTablaPosicion(carreras,equipos,jugadores, idFecha);
                         mostrarTabla(dataPosiciones,idFecha);     
                         $('#classModal').modal('show');
-                        $this.addClass('disabled');
+                        
+                        $.get("./api/carreras", function(carreras){
+                            for(var i=0; i< carreras.length; i++){
+                                if(carreras[i].fecha == idFecha){
+                                    contenedorComentario = $("#comentario");
+                                    var parrafo = $("<p/>").text(carreras[i].comentario);
+                                    contenedorComentario.append(parrafo);
+                                }
+                            }  
+                        });
+
+                        var buttonAgregar = $("#agregarComentario");
+                        $(buttonAgregar).click(function(){
+                            var value = $("#inputComment_id").val();
+                            contenedorComentario = $("#comentario");
+                            contenedorComentario.empty();
+                            var parrafo = $("<p/>").text(value);
+                            contenedorComentario.append(parrafo);
+                            guardarComentarioBD(value, idFecha);    
+                            $("#inputComment_id").val('');
+                         });
+                       
+                        
                     });
                 });
             });
@@ -127,4 +149,21 @@ function mostrarTabla(dataPosiciones, idFecha){
     $("#classModalLabel").text("MARIO KART TOURNAMENT: FECHA "+idFecha);
     container = $("#modalTable");
     makeRankTable(container,dataPosiciones, "FECHA "+ idFecha);
+}
+
+function guardarComentarioBD(comentario, idFecha){
+    const comentarioString = JSON.stringify(comentario);
+    const idFechaString = JSON.stringify(idFecha);
+   $.ajax({
+        url: './api/comentario',
+        type: 'POST',
+        data: JSON.stringify({fecha: JSON.parse(idFechaString), comentario: JSON.parse(comentarioString)}),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(data){ 
+            console.log("ok"+ data);
+        },
+        error: function(data) {
+        }
+    });
 }

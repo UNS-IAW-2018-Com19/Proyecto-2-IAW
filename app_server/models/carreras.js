@@ -40,6 +40,9 @@ const carreraSchema = new mongoose.Schema({
         type: Number,
         required: true
       }}],
+    comentario: {
+      type: String
+    }
 
 });
 
