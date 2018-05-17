@@ -10,7 +10,7 @@ body {
     background: #e60012;
 }
 
-#toggleB{
+#toggleVisitor, #toggleBDUser{
     background-color: #3b5998;
 }
 

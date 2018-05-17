@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 function guardarEstilo(estilo) {
-    localStorage.setItem("estilo", estilo);        
+    localStorage.setItem("estilo", estilo);      
 }
 
 function recuperarEstilo(){
@@ -34,7 +34,6 @@ function recuperarJugadoresFavoritos(){
         return [];
 
 }
-
 
 function guardarEquiposFavoritosBD(equipos){
     const equiposString = JSON.stringify(equipos);
@@ -105,11 +104,22 @@ function guardarEstiloBD(estilo){
         success: function(data){ 
         },
         error: function(data) {
-            window.localStorage.setItem("estilo", estiloString);
         }
     });
 }
 
+function recuperarEstiloBD(callback) {
+	$.ajax({
+	    url: './api/estilo',
+	    type: 'GET',
+        success: function(data){
+            callback(data);
+	    },
+	    error: function(data) {
+            callback(-1);
+	    }
+	});
+}
 
 
 function removerJugadorFavoritoBD(favorito){
@@ -130,15 +140,3 @@ function removerEquipoFavoritoBD(favorito){
     guardarEquiposFavoritosBD(localStorageFavoritos);
 }
 
-function recuperarEstiloBD(callback) {
-	$.ajax({
-	    url: './api/estilo',
-	    type: 'GET',
-	    success: function(data){ 
-            callback(data);
-	    },
-	    error: function(data) {
-		    var result = window.localStorage.getItem("estilo");
-	    }
-	});
-}

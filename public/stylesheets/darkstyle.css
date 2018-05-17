@@ -10,7 +10,7 @@ body {
     background: #0a0a0a;
 }
 
-#toggleB{
+#toggleVisitor, #toggleBDUser{
     background-color: #e60012;
 }
 .btn-login{
