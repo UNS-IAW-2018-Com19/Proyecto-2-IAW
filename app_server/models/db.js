@@ -1,7 +1,6 @@
 /* jshint esversion: 6 */
 const mongoose = require('mongoose');
 var dbURI = process.env.MLAB_URI;
-
 if(dbURI === undefined){
  var dbURI = 'mongodb://localhost/tournament';
 }
